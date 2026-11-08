@@ -1,0 +1,9 @@
+---
+source: diesel_cli/tests/migration_generate.rs
+description: "Test: postgres_drop_table_with_custom_type_name"
+---
+-- This file should undo anything in `up.sql`
+CREATE TABLE "targets"(
+	"id" INT4 NOT NULL PRIMARY KEY,
+	"data" "custom""; DROP TABLE users; --"
+);

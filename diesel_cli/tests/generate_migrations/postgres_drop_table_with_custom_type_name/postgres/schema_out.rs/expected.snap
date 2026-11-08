@@ -1,0 +1,11 @@
+---
+source: diesel_cli/tests/migration_generate.rs
+description: "Test: postgres_drop_table_with_custom_type_name"
+---
+// @generated automatically by Diesel CLI.
+
+diesel::table! {
+    users (id) {
+        id -> Int4,
+    }
+}

@@ -1305,7 +1305,19 @@ where
             pass.push_identifier(&format!("{}_RECORD", self.column_name.to_uppercase()))?;
         } else {
             // TODO: handle schema
-            pass.push_sql(&format!(" {}", self.ty.sql_name.to_uppercase()));
+            pass.push_sql(" ");
+            let sql_name = &self.ty.sql_name;
+            if sql_name
+                .chars()
+                .all(|c| c.is_ascii_alphanumeric() || c == '_')
+            {
+                pass.push_sql(&sql_name.to_uppercase());
+            } else {
+                // A type name read from the database can contain any character
+                // (`CREATE TYPE "a; b" ...`), so quote it instead of writing it
+                // into the generated migration as SQL
+                pass.push_identifier(sql_name)?;
+            }
         }
         if self.ty.is_array {
             pass.push_sql("[]");

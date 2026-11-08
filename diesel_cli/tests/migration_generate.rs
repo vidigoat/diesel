@@ -296,6 +296,12 @@ fn migration_generate_postgres_add_record() {
     test_generate_migration("postgres_add_record", Vec::new())
 }
 
+#[cfg(feature = "postgres")]
+#[test]
+fn migration_generate_postgres_drop_table_with_custom_type_name() {
+    test_generate_migration("postgres_drop_table_with_custom_type_name", Vec::new())
+}
+
 #[cfg(any(feature = "postgres", feature = "mysql", feature = "mariadb"))]
 #[test]
 fn migration_generate_add_enum() {
